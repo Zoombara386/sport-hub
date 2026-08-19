@@ -1,184 +1,535 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
+/* =========================================
+   SPORTS HUB - GLOBAL STYLES
+   ========================================= */
 
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+* {
+  box-sizing: border-box;
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+html {
+  scroll-behavior: smooth;
 }
 
-#center {
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    Arial,
+    Helvetica,
+    sans-serif;
+  background: #f4f6f8;
+  color: #17202a;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+
+/* =========================================
+   CONTAINER
+   ========================================= */
+
+.container {
+  width: min(1200px, 94%);
+  margin: 0 auto;
+  padding: 25px 0 50px;
+}
+
+.container > h1 {
+  margin: 0 0 25px;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+
+/* =========================================
+   CARDS
+   ========================================= */
+
+.card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow:
+    0 4px 18px rgba(0, 0, 0, 0.07);
+}
+
+.card h1,
+.card h2,
+.card h3 {
+  margin-top: 0;
+}
+
+
+/* =========================================
+   FIXTURES GRID
+   ========================================= */
+
+.fixtures-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.fixture-card {
+  text-align: center;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.fixture-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.11);
+}
+
+
+/* =========================================
+   TEAMS
+   ========================================= */
+
+.teams {
   display: flex;
-  flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
 }
 
-#next-steps {
+.team {
+  flex: 1;
+  text-align: center;
+}
+
+.team img {
+  object-fit: contain;
+  max-width: 80px;
+  max-height: 80px;
+}
+
+
+/* =========================================
+   MATCH DETAILS BUTTON
+   ========================================= */
+
+.details-button {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: #1266f1;
+  color: white;
+  font-weight: 700;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.details-button:hover {
+  background: #0b4fc1;
+  transform: translateY(-1px);
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+button {
+  border: 0;
+  border-radius: 8px;
+  padding: 10px 18px;
+  background: #1266f1;
+  color: white;
+  font-weight: 700;
+}
+
+button:hover {
+  background: #0b4fc1;
+}
+
+
+/* =========================================
+   MATCH HEADER
+   ========================================= */
+
+.match-header {
+  text-align: center;
+}
+
+.match-teams {
   display: flex;
-  border-top: 1px solid var(--border);
-  text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
+  align-items: center;
+  justify-content: center;
+  gap: 45px;
+  text-align: center;
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+.match-team {
+  min-width: 150px;
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
+.match-team img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+}
+
+.match-score {
+  min-width: 120px;
+  text-align: center;
+}
+
+.match-score h1 {
+  font-size: 42px;
+  margin: 0;
+}
+
+.match-score h3 {
+  margin-top: 8px;
+}
+
+
+/* =========================================
+   LIVE STATUS
+   ========================================= */
+
+.live-status {
+  text-align: center;
+}
+
+.live-status h2 {
+  color: #e53935;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: #e53935;
+}
+
+
+/* =========================================
+   MATCH EVENTS
+   ========================================= */
+
+.events-list {
+  margin-top: 15px;
+}
+
+.event-row {
   display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  align-items: center;
+  gap: 14px;
+  padding: 13px 5px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+.event-row:last-child {
+  border-bottom: 0;
 }
 
-.ticks {
-  position: relative;
+.event-minute {
+  width: 45px;
+  font-weight: 800;
+}
+
+.event-icon {
+  width: 35px;
+  font-size: 22px;
+  text-align: center;
+}
+
+.event-content {
+  flex: 1;
+}
+
+.event-content strong {
+  display: block;
+}
+
+.event-team {
+  display: block;
+  margin-top: 3px;
+  color: #687078;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   MATCH STATISTICS
+   ========================================= */
+
+.stats-table {
   width: 100%;
+  margin-top: 15px;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+.stat-row {
+  display: grid;
+  grid-template-columns:
+    80px 1fr 80px;
+
+  align-items: center;
+
+  min-height: 48px;
+
+  padding: 8px 0;
+
+  border-bottom:
+    1px solid #e5e7eb;
+}
+
+.stat-row:last-child {
+  border-bottom: 0;
+}
+
+.stat-row strong {
+  font-size: 16px;
+  color: #17202a;
+}
+
+.stat-row strong:first-child {
+  text-align: left;
+}
+
+.stat-row strong:last-child {
+  text-align: right;
+}
+
+.stat-row > div {
+  text-align: center;
+  color: #5f6b76;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* =========================================
+   SCORE
+   ========================================= */
+
+.score-table {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 5px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.score-row:last-child {
+  border-bottom: 0;
+}
+
+.score-value {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+
+/* =========================================
+   MATCH INFORMATION
+   ========================================= */
+
+.match-information p {
+  margin: 10px 0;
+  color: #4b5563;
+}
+
+
+/* =========================================
+   LOADING
+   ========================================= */
+
+.loading {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.loading h2 {
+  margin: 0;
+}
+
+
+/* =========================================
+   ERROR
+   ========================================= */
+
+.error-card {
+  text-align: center;
+}
+
+.error-card h1 {
+  color: #d32f2f;
+}
+
+.error-card p {
+  color: #5f6368;
+}
+
+
+/* =========================================
+   BACK LINK
+   ========================================= */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-weight: 700;
+  color: #1266f1;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+
+/* =========================================
+   LIVE MATCH CARD
+   ========================================= */
+
+.live-match-card {
+  border-left: 4px solid #e53935;
+}
+
+.live-match-card h3 {
+  color: #e53935;
+}
+
+
+/* =========================================
+   RESPONSIVE - TABLET
+   ========================================= */
+
+@media (max-width: 768px) {
+
+  .container {
+    width: 92%;
+    padding-top: 18px;
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  .container > h1 {
+    font-size: 25px;
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+
+  .match-teams {
+    gap: 20px;
+  }
+
+  .match-team {
+    min-width: 100px;
+  }
+
+  .match-team img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .match-score h1 {
+    font-size: 32px;
+  }
+
+  .fixtures-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* =========================================
+   RESPONSIVE - MOBILE
+   ========================================= */
+
+@media (max-width: 520px) {
+
+  .container {
+    width: 94%;
+    padding: 15px 0 35px;
+  }
+
+  .container > h1 {
+    font-size: 22px;
+  }
+
+  .card {
+    padding: 15px;
+    border-radius: 11px;
+  }
+
+  .teams,
+  .match-teams {
+    gap: 12px;
+  }
+
+  .team img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .match-team img {
+    width: 65px;
+    height: 65px;
+  }
+
+  .match-team {
+    min-width: 80px;
+  }
+
+  .match-score {
+    min-width: 80px;
+  }
+
+  .match-score h1 {
+    font-size: 27px;
+  }
+
+  .stat-row {
+    grid-template-columns:
+      55px 1fr 55px;
+
+    min-height: 44px;
+  }
+
+  .stat-row strong {
+    font-size: 14px;
+  }
+
+  .stat-row > div {
+    font-size: 12px;
+  }
+
+  .details-button {
+    width: 100%;
+    padding: 11px;
+  }
+
+  .event-row {
+    gap: 8px;
+  }
+
+  .event-minute {
+    width: 35px;
+    font-size: 13px;
+  }
+
+  .event-icon {
+    width: 28px;
   }
 }
