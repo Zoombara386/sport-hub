@@ -1,363 +1,1094 @@
-/* -------------------------------------------------------------------------- */
-/* Design Tokens & Theme Variables                                            */
-/* -------------------------------------------------------------------------- */
-:root {
-  /* Surface Colors */
-  --bg-app: #090d16;
-  --bg-card: rgba(19, 27, 46, 0.6);
-  --bg-card-hover: rgba(30, 41, 67, 0.8);
-  --bg-glass: rgba(15, 23, 42, 0.75);
+/* =========================================================
+   SPORT HUB
+   Complete index.css
+   Dark ESPN-style sports dashboard
+========================================================= */
 
-  /* Brand Accent Colors */
-  --primary: #6366f1;
-  --primary-glow: rgba(99, 102, 241, 0.3);
-  --accent-live: #10b981;
-  
-  /* Text & Border Colors */
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --border-light: rgba(255, 255, 255, 0.08);
-  --border-active: rgba(99, 102, 241, 0.4);
 
-  /* Unified Layout Spacing Tokens */
-  --space-xs: 0.5rem;
-  --space-sm: 0.75rem;
-  --space-md: 1rem;
-  --space-lg: 1.5rem;
-  --space-xl: 2rem;
-  
-  --radius-lg: 20px;
-  --radius-md: 12px;
-  --radius-sm: 8px;
-  --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+/* =========================================================
+   RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-/* Reset & Global Typography */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--bg-app);
-  color: var(--text-main);
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  line-height: 1.5;
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(20, 100, 160, 0.18),
+      transparent 40%
+    ),
+    #08111d;
+
+  color: #e9eef5;
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
   -webkit-font-smoothing: antialiased;
-  padding-bottom: 5rem; /* Room for mobile bottom bar */
+  text-rendering: optimizeLegibility;
 }
 
-/* App Container Layout */
-.app-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--space-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
+body,
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
 }
 
-/* -------------------------------------------------------------------------- */
-/* Header & Desktop Top Navigation                                            */
-/* -------------------------------------------------------------------------- */
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-md) var(--space-lg);
-  background: var(--bg-glass);
-  backdrop-filter: blur(16px);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
-}
-
-.brand-name {
-  font-size: 1.25rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.desktop-nav {
-  display: flex;
-  gap: var(--space-xs);
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  padding: var(--space-xs) var(--space-md);
-  color: var(--text-muted);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.9rem;
-  border-radius: var(--radius-md);
-  transition: var(--transition);
-}
-
-.nav-item:hover,
-.nav-item.active {
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.nav-item.active {
-  color: var(--primary);
-}
-
-/* -------------------------------------------------------------------------- */
-/* Main Layout & Grid Consistency                                             */
-/* -------------------------------------------------------------------------- */
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-md);
-}
-
-.section-header h1 {
-  font-size: clamp(1.25rem, 2vw, 1.75rem);
-  font-weight: 800;
-}
-
-.badge-live {
-  background: rgba(16, 185, 129, 0.15);
-  color: var(--accent-live);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.sports-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
-  gap: var(--space-lg);
-}
-
-/* -------------------------------------------------------------------------- */
-/* Uniform Card Components                                                    */
-/* -------------------------------------------------------------------------- */
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  padding: var(--space-lg);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-md);
-  backdrop-filter: blur(10px);
-  transition: var(--transition);
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  background: var(--bg-card-hover);
-  border-color: var(--border-active);
-  box-shadow: 0 12px 30px -10px var(--primary-glow);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-.league-tag {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.2rem 0.6rem;
-  border-radius: var(--radius-sm);
-}
-
-/* Scoreboard Layout */
-.scoreboard {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--space-sm) 0;
-}
-
-.team {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-xs);
-  flex: 1;
-}
-
-.team-avatar {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: var(--text-main);
-}
-
-.team-name {
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-.score-display {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-  font-size: 1.5rem;
-  font-weight: 800;
-}
-
-.score-divider, .score-vs {
-  color: var(--text-muted);
-  font-size: 0.9rem;
-}
-
-/* Buttons */
-.btn {
-  width: 100%;
-  padding: 0.75rem;
-  border-radius: var(--radius-md);
-  border: none;
-  font-weight: 700;
-  font-size: 0.875rem;
+button {
   cursor: pointer;
-  transition: var(--transition);
 }
 
-.btn-primary {
-  background: var(--primary);
-  color: #ffffff;
-}
-
-.btn-primary:hover {
-  filter: brightness(1.15);
-  box-shadow: 0 4px 15px var(--primary-glow);
-}
-
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-main);
-  border: 1px solid var(--border-light);
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* -------------------------------------------------------------------------- */
-/* SVG Icon Masks                                                             */
-/* -------------------------------------------------------------------------- */
-.brand-icon, .nav-icon {
-  display: inline-block;
-  width: 1.25rem;
-  height: 1.25rem;
-  background-color: currentColor;
-}
-
-.brand-icon {
-  background-color: var(--primary);
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpolygon points='12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2'%3E%3C/polygon%3E") center/contain no-repeat;
-}
-
-.icon-home {
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'%3E%3C/path%3E%3C/svg%3E") center/contain no-repeat;
-}
-
-.icon-matches {
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cpolygon points='10 8 16 12 10 16 10 8'%3E%3C/polygon%3E%3C/svg%3E") center/contain no-repeat;
-}
-
-.icon-stats {
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cline x1='18' y1='20' x2='18' y2='10'%3E%3C/line%3E%3Cline x1='12' y1='20' x2='12' y2='4'%3E%3C/line%3E%3Cline x1='6' y1='20' x2='6' y2='14'%3E%3C/line%3E%3C/svg%3E") center/contain no-repeat;
-}
-
-.icon-profile {
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3Ccircle cx='12' cy='7' r='4'%3E%3C/circle%3E%3C/svg%3E") center/contain no-repeat;
-}
-
-/* -------------------------------------------------------------------------- */
-/* Bottom Navigation Bar (Small Screen Mobile View)                           */
-/* -------------------------------------------------------------------------- */
-.bottom-nav {
-  display: none;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 4rem;
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border-light);
-  justify-content: space-around;
-  align-items: center;
-  z-index: 1000;
-  padding: 0 var(--space-md);
-}
-
-.mobile-nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  color: var(--text-muted);
+a {
+  color: inherit;
   text-decoration: none;
-  font-size: 0.7rem;
-  font-weight: 600;
-  transition: var(--transition);
-  width: 25%;
 }
 
-.mobile-nav-item.active {
-  color: var(--primary);
+img {
+  max-width: 100%;
+  display: block;
 }
 
-.mobile-nav-item.active .nav-icon {
-  background-color: var(--primary);
+#root {
+  min-height: 100vh;
 }
 
-/* Responsive Breakpoints */
-@media (max-width: 768px) {
-  body {
-    padding-bottom: 5rem; /* Prevents card content from hiding behind fixed bottom bar */
+
+/* =========================================================
+   SCROLLBAR
+========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #08111d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #26384d;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #38516c;
+}
+
+
+/* =========================================================
+   GLOBAL CONTAINER
+========================================================= */
+
+.container {
+  width: min(1450px, calc(100% - 56px));
+
+  margin: 0 auto;
+
+  padding: 34px 0 80px;
+}
+
+
+/* =========================================================
+   PAGE HEADINGS
+========================================================= */
+
+.container > h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(38px, 5vw, 58px);
+
+  line-height: 1.04;
+
+  font-weight: 950;
+
+  letter-spacing: -2.5px;
+}
+
+.container > p {
+  margin: 10px 0 32px;
+
+  color: #91a0b2;
+
+  font-size: 15px;
+
+  line-height: 1.6;
+}
+
+.container > h2 {
+  position: relative;
+
+  margin: 44px 0 18px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  color: #ffffff;
+
+  font-size: 20px;
+
+  line-height: 1.2;
+
+  font-weight: 900;
+}
+
+.container > h2::before {
+  content: "";
+
+  width: 4px;
+  height: 22px;
+
+  flex: 0 0 auto;
+
+  border-radius: 5px;
+
+  background: #ff263d;
+}
+
+
+/* =========================================================
+   GENERIC CARD GRID
+   Used by current Football.jsx
+========================================================= */
+
+.container > .cards {
+  width: 100%;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin: 0;
+
+  padding: 0;
+
+  clear: both;
+
+  position: relative;
+
+  float: none;
+
+  overflow: visible;
+}
+
+
+/* =========================================================
+   GENERIC CARD
+========================================================= */
+
+.container > .cards > .card {
+  position: relative;
+
+  width: 100%;
+
+  min-width: 0;
+
+  min-height: 160px;
+
+  margin: 0;
+
+  padding: 21px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  overflow: hidden;
+
+  float: none;
+
+  transform: none;
+
+  border: 1px solid #22344a;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #142337 0%,
+      #0d1929 100%
+    );
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.16);
+
+  transition:
+    border-color 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.container > .cards > .card:hover {
+  transform: translateY(-2px);
+
+  border-color: #36516c;
+
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================================
+   CARD TYPOGRAPHY
+========================================================= */
+
+.container > .cards > .card h2 {
+  margin: 0 0 7px;
+
+  color: #ffffff;
+
+  font-size: 18px;
+
+  line-height: 1.25;
+
+  font-weight: 900;
+}
+
+.container > .cards > .card h3 {
+  margin: 10px 0 6px;
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  line-height: 1.25;
+
+  font-weight: 900;
+}
+
+.container > .cards > .card p {
+  margin: 0 0 14px;
+
+  color: #91a0b2;
+
+  font-size: 12px;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   CARD LINKS
+========================================================= */
+
+.container > .cards > .card a {
+  display: inline-flex;
+
+  width: fit-content;
+
+  max-width: 100%;
+
+  margin-top: auto;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.container > .cards > .card button {
+  min-height: 37px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 9px 16px;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background: #00b987;
+
+  color: #ffffff;
+
+  font-size: 11px;
+
+  line-height: 1;
+
+  font-weight: 900;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.container > .cards > .card button:hover {
+  background: #00d59c;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   QUICK ACTIONS
+========================================================= */
+
+.container > .cards:first-of-type {
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+}
+
+.container > .cards:first-of-type > .card {
+  min-height: 145px;
+
+  height: 145px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  grid-template-rows:
+    auto
+    1fr
+    auto;
+
+  column-gap: 18px;
+
+  align-items: start;
+}
+
+.container > .cards:first-of-type > .card h2 {
+  grid-column: 1;
+
+  grid-row: 1;
+}
+
+.container > .cards:first-of-type > .card p {
+  grid-column: 1;
+
+  grid-row: 2;
+
+  align-self: start;
+}
+
+.container > .cards:first-of-type > .card a {
+  grid-column: 2;
+
+  grid-row: 1 / span 3;
+
+  align-self: center;
+}
+
+
+/* =========================================================
+   LEAGUES
+========================================================= */
+
+.container > h2:nth-of-type(1) + .cards {
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+}
+
+.container > h2:nth-of-type(1) + .cards > .card {
+  min-height: 155px;
+
+  height: 155px;
+
+  padding: 18px;
+}
+
+
+/* =========================================================
+   POPULAR TEAMS
+=========================================================
+
+   6 teams:
+   Arsenal
+   Manchester City
+   Real Madrid
+   Barcelona
+   Manchester United
+   Liverpool
+
+   Desktop = 3 columns × 2 rows
+========================================================= */
+
+.container > h2:nth-of-type(2) + .cards {
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.container > h2:nth-of-type(2) + .cards > .card {
+  min-height: 175px;
+
+  height: 175px;
+
+  display: grid;
+
+  grid-template-columns:
+    78px
+    minmax(0, 1fr);
+
+  grid-template-rows:
+    1fr
+    auto;
+
+  column-gap: 17px;
+
+  align-items: center;
+
+  padding: 18px;
+
+  text-align: left;
+}
+
+
+/* =========================================================
+   TEAM LOGO
+========================================================= */
+
+.container > h2:nth-of-type(2) + .cards > .card img {
+  grid-column: 1;
+
+  grid-row: 1 / span 2;
+
+  width: 70px;
+
+  height: 70px;
+
+  min-width: 70px;
+
+  min-height: 70px;
+
+  margin: auto;
+
+  object-fit: contain;
+
+  position: static;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   TEAM NAME
+========================================================= */
+
+.container > h2:nth-of-type(2) + .cards > .card h3 {
+  grid-column: 2;
+
+  grid-row: 1;
+
+  align-self: end;
+
+  width: 100%;
+
+  min-width: 0;
+
+  margin: 0 0 5px;
+
+  overflow-wrap: anywhere;
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  line-height: 1.2;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   TEAM DETAILS BUTTON
+========================================================= */
+
+.container > h2:nth-of-type(2) + .cards > .card a {
+  grid-column: 2;
+
+  grid-row: 2;
+
+  align-self: start;
+
+  margin: 0;
+}
+
+.container > h2:nth-of-type(2) + .cards > .card button {
+  min-height: 32px;
+
+  padding: 8px 13px;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   EXPLORE FOOTBALL
+   Teams / Players / News
+========================================================= */
+
+.container > .cards:last-child {
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-top: 0;
+
+  padding: 0;
+
+  border: 0;
+
+  clear: both;
+}
+
+.container > .cards:last-child > .card {
+  min-height: 150px;
+
+  height: 150px;
+
+  padding: 21px;
+
+  text-align: left;
+}
+
+.container > .cards:last-child > .card h2 {
+  margin-bottom: 6px;
+}
+
+.container > .cards:last-child > .card p {
+  max-width: 290px;
+}
+
+
+/* =========================================================
+   ABSOLUTE-POSITION SAFETY
+=========================================================
+
+   These rules intentionally prevent old CSS from making
+   Football cards float over another section.
+========================================================= */
+
+.container > .cards,
+.container > .cards > .card,
+.container > .cards > .card img,
+.container > .cards > .card a {
+  float: none;
+}
+
+.container > .cards > .card {
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+}
+
+
+/* =========================================================
+   FOOTBALL-SPECIFIC CLASSES
+   Compatible with the newer Football.jsx version too.
+========================================================= */
+
+.football-page {
+  width: 100%;
+
+  min-height: 100vh;
+}
+
+.football-container {
+  width: min(1450px, calc(100% - 56px));
+
+  margin: 0 auto;
+
+  padding: 34px 0 80px;
+}
+
+.football-section {
+  width: 100%;
+
+  margin: 0 0 42px;
+}
+
+.football-action-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.football-league-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(5, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.football-team-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.football-tools-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+
+/* =========================================================
+   MODERN FOOTBALL TEAM CARD
+========================================================= */
+
+.football-team-card {
+  width: 100%;
+
+  min-width: 0;
+
+  min-height: 175px;
+
+  display: grid;
+
+  grid-template-columns:
+    82px
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 18px;
+
+  border:
+    1px solid #22344a;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #142337,
+      #0d1929
+    );
+
+  overflow: hidden;
+}
+
+.football-team-logo {
+  width: 78px;
+
+  height: 78px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.football-team-logo img {
+  width: 68px;
+
+  height: 68px;
+
+  object-fit: contain;
+}
+
+.football-team-information {
+  min-width: 0;
+}
+
+.football-team-information h3 {
+  margin: 0 0 6px;
+
+  color: #ffffff;
+
+  font-size: 17px;
+
+  line-height: 1.2;
+
+  font-weight: 900;
+
+  overflow-wrap: anywhere;
+}
+
+.football-team-information p {
+  margin: 0;
+
+  color: #91a0b2;
+
+  font-size: 11px;
+}
+
+.football-team-details {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 110px;
+
+  padding: 9px 13px;
+
+  border-radius: 999px;
+
+  background: #00b987;
+
+  color: #ffffff;
+
+  font-size: 10px;
+
+  font-weight: 900;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   MODERN FOOTBALL TOOL CARD
+========================================================= */
+
+.football-tool-card {
+  min-height: 160px;
+
+  padding: 22px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  border:
+    1px solid #22344a;
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #142337,
+      #0d1929
+    );
+}
+
+.football-tool-icon {
+  font-size: 27px;
+
+  margin-bottom: 5px;
+}
+
+.football-tool-card h3 {
+  margin: 0 0 5px;
+
+  color: #ffffff;
+
+  font-size: 17px;
+
+  font-weight: 900;
+}
+
+.football-tool-card p {
+  margin: 0 0 12px;
+
+  color: #91a0b2;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   FOOTBALL BUTTONS
+========================================================= */
+
+.football-green-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 36px;
+
+  padding: 9px 15px;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  background: #00b987;
+
+  color: #ffffff;
+
+  font-size: 10px;
+
+  font-weight: 900;
+}
+
+.football-green-button:hover {
+  background: #00d49b;
+}
+
+
+/* =========================================================
+   LIVE INDICATOR
+========================================================= */
+
+.live-dot {
+  width: 8px;
+
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #ff263d;
+
+  box-shadow:
+    0 0 10px rgba(255, 38, 61, 0.8);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1150px) {
+
+  .container,
+  .football-container {
+    width: min(100% - 40px, 1000px);
   }
 
-  .desktop-nav {
-    display: none; /* Hide top links on mobile */
+  .container > h2:nth-of-type(1) + .cards {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
   }
 
-  .bottom-nav {
-    display: flex; /* Show modern bottom tab bar */
+  .container > h2:nth-of-type(2) + .cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 
-  .app-container {
-    padding: var(--space-sm);
+  .football-league-grid {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+  }
+
+  .football-team-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (min-width: 769px) {
-  body {
-    padding-bottom: 0;
+
+/* =========================================================
+   TABLET SMALL
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .container > .cards:first-of-type {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .container > h2:nth-of-type(1) + .cards {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .football-action-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .football-tools-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 680px) {
+
+  .container,
+  .football-container {
+    width: calc(100% - 24px);
+
+    padding-top: 26px;
+  }
+
+  .container > h1 {
+    font-size: 38px;
+
+    letter-spacing: -1.5px;
+  }
+
+  .container > h2 {
+    margin-top: 34px;
+
+    font-size: 18px;
+  }
+
+  .container > .cards:first-of-type,
+  .container > h2:nth-of-type(1) + .cards,
+  .container > h2:nth-of-type(2) + .cards,
+  .container > .cards:last-child {
+    grid-template-columns: 1fr;
+  }
+
+  .container > .cards > .card {
+    min-height: 145px;
+
+    height: auto;
+  }
+
+  .container > .cards:first-of-type > .card {
+    display: flex;
+
+    min-height: 145px;
+
+    height: auto;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .container > .cards:first-of-type > .card a {
+    margin-top: 10px;
+  }
+
+  .container > h2:nth-of-type(2) + .cards > .card {
+    min-height: 155px;
+
+    height: 155px;
+  }
+
+  .container > h2:nth-of-type(2) + .cards > .card img {
+    width: 62px;
+
+    height: 62px;
+
+    min-width: 62px;
+
+    min-height: 62px;
+  }
+
+  .football-action-grid,
+  .football-league-grid,
+  .football-team-grid,
+  .football-tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .football-team-card {
+    grid-template-columns:
+      70px
+      minmax(0, 1fr);
+
+    min-height: 155px;
+  }
+
+  .football-team-details {
+    grid-column: 2;
+
+    justify-self: start;
+
+    min-width: 105px;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONE
+========================================================= */
+
+@media (max-width: 430px) {
+
+  .container,
+  .football-container {
+    width: calc(100% - 18px);
+  }
+
+  .container > h1 {
+    font-size: 33px;
+  }
+
+  .container > .cards > .card {
+    padding: 17px;
+  }
+
+  .container > h2:nth-of-type(1) + .cards > .card {
+    min-height: 145px;
+  }
+
+  .container > h2:nth-of-type(2) + .cards > .card {
+    min-height: 145px;
+
+    height: 145px;
+  }
+
+  .football-team-card {
+    padding: 15px;
   }
 }
