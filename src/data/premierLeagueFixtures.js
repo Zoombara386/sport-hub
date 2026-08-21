@@ -1,0 +1,148 @@
+export const premierLeagueFixtures = [
+  // Matchweek 1
+  {
+    id: "pl-2026-27-001",
+    matchweek: 1,
+    date: "2026-08-21",
+    home: "Arsenal",
+    away: "Coventry City",
+  },
+  {
+    id: "pl-2026-27-002",
+    matchweek: 1,
+    date: "2026-08-21",
+    home: "Hull City",
+    away: "Manchester United",
+  },
+  {
+    id: "pl-2026-27-003",
+    matchweek: 1,
+    date: "2026-08-21",
+    home: "Everton",
+    away: "Crystal Palace",
+  },
+  {
+    id: "pl-2026-27-004",
+    matchweek: 1,
+    date: "2026-08-21",
+    home: "Ipswich Town",
+    away: "Sunderland",
+  },
+  {
+    id: "pl-2026-27-005",
+    matchweek: 1,
+    date: "2026-08-21",
+    home: "Nottingham Forest",
+    away: "Leeds United",
+  },
+  {
+    id: "pl-2026-27-006",
+    matchweek: 1,
+    date: "2026-08-21",
+    home: "Brentford",
+    away: "Tottenham Hotspur",
+  },
+  {
+    id: "pl-2026-27-007",
+    matchweek: 1,
+    date: "2026-08-21",
+    home: "Brighton & Hove Albion",
+    away: "Aston Villa",
+  },
+  {
+    id: "pl-2026-27-008",
+    matchweek: 1,
+    date: "2026-08-21",
+    home: "Manchester City",
+    away: "AFC Bournemouth",
+  },
+  {
+    id: "pl-2026-27-009",
+    matchweek: 1,
+    date: "2026-08-21",
+    home: "Newcastle United",
+    away: "Liverpool",
+  },
+  {
+    id: "pl-2026-27-010",
+    matchweek: 1,
+    date: "2026-08-21",
+    home: "Fulham",
+    away: "Chelsea",
+  },
+
+  // Matchweek 2
+  {
+    id: "pl-2026-27-011",
+    matchweek: 2,
+    date: "2026-08-28",
+    home: "Crystal Palace",
+    away: "Manchester City",
+  },
+  {
+    id: "pl-2026-27-012",
+    matchweek: 2,
+    date: "2026-08-28",
+    home: "Liverpool",
+    away: "Nottingham Forest",
+  },
+  {
+    id: "pl-2026-27-013",
+    matchweek: 2,
+    date: "2026-08-28",
+    home: "AFC Bournemouth",
+    away: "Everton",
+  },
+  {
+    id: "pl-2026-27-014",
+    matchweek: 2,
+    date: "2026-08-28",
+    home: "Coventry City",
+    away: "Hull City",
+  },
+  {
+    id: "pl-2026-27-015",
+    matchweek: 2,
+    date: "2026-08-28",
+    home: "Tottenham Hotspur",
+    away: "Newcastle United",
+  },
+  {
+    id: "pl-2026-27-016",
+    matchweek: 2,
+    date: "2026-08-28",
+    home: "Chelsea",
+    away: "Brighton & Hove Albion",
+  },
+  {
+    id: "pl-2026-27-017",
+    matchweek: 2,
+    date: "2026-08-28",
+    home: "Leeds United",
+    away: "Brentford",
+  },
+  {
+    id: "pl-2026-27-018",
+    matchweek: 2,
+    date: "2026-08-28",
+    home: "Sunderland",
+    away: "Fulham",
+  },
+  {
+    id: "pl-2026-27-019",
+    matchweek: 2,
+    date: "2026-08-28",
+    home: "Manchester United",
+    away: "Ipswich Town",
+  },
+  {
+    id: "pl-2026-27-020",
+    matchweek: 2,
+    date: "2026-08-28",
+    home: "Aston Villa",
+    away: "Arsenal",
+  },
+
+  // Continue the remaining matchweeks from your uploaded
+  // premier_league_2026_27_all_38_matchweeks(3).md file.
+];

@@ -13,8 +13,7 @@ export default function LiveScores() {
       setLoading(true);
       setError("");
 
-      const apiKey =
-        import.meta.env.VITE_API_FOOTBALL_KEY;
+      const apiKey = import.meta.env.VITE_API_FOOTBALL_KEY;
 
       if (!apiKey) {
         throw new Error(
@@ -37,15 +36,17 @@ export default function LiveScores() {
 
       if (!response.ok) {
         throw new Error(
-          data?.message ||
-            `API error: ${response.status}`
+          data?.message || `API error: ${response.status}`
         );
       }
 
       setGames(data.response || []);
     } catch (err) {
       console.error("Live games error:", err);
-      setError(err.message);
+
+      setError(
+        err?.message || "Unable to load live games"
+      );
     } finally {
       setLoading(false);
     }
@@ -61,47 +62,216 @@ export default function LiveScores() {
     return () => clearInterval(timer);
   }, []);
 
+  /* =====================================================
+     LOADING
+  ===================================================== */
+
   if (loading) {
     return (
-      <div className="container">
-        <h1>🔴 Live Football</h1>
+      <main className="container live-page">
 
-        <div className="card">
-          <h2>Loading live games...</h2>
-        </div>
-      </div>
+        <section className="live-page-header">
+          <div>
+            <span className="live-page-kicker">
+              FOOTBALL
+            </span>
+
+            <h1>
+              🔴 Live Scores
+            </h1>
+
+            <p>
+              Live matches and real-time scores
+            </p>
+          </div>
+
+          <div className="live-status-pill">
+            <span className="live-dot"></span>
+            Updating
+          </div>
+        </section>
+
+        <section className="live-loading-card">
+          <div className="live-loading-spinner"></div>
+
+          <h2>
+            Loading live matches
+          </h2>
+
+          <p>
+            Fetching the latest football scores...
+          </p>
+        </section>
+
+      </main>
     );
   }
+
+
+  /* =====================================================
+     ERROR
+  ===================================================== */
 
   if (error) {
     return (
-      <div className="container">
-        <h1>🔴 Live Football</h1>
+      <main className="container live-page">
 
-        <div className="card">
-          <h2>❌ Unable to load live games</h2>
-          <p>{error}</p>
+        <section className="live-page-header">
+          <div>
+            <span className="live-page-kicker">
+              FOOTBALL
+            </span>
 
-          <button onClick={loadLiveGames}>
-            🔄 Try Again
-          </button>
-        </div>
-      </div>
+            <h1>
+              🔴 Live Scores
+            </h1>
+
+            <p>
+              Live matches and real-time scores
+            </p>
+          </div>
+        </section>
+
+
+        <section className="live-error-card">
+
+          <div className="live-error-icon">
+            !
+          </div>
+
+          <div>
+            <h2>
+              Unable to load live games
+            </h2>
+
+            <p>
+              {error}
+            </p>
+
+            <button
+              className="live-retry-button"
+              onClick={loadLiveGames}
+            >
+              🔄 Try Again
+            </button>
+          </div>
+
+        </section>
+
+      </main>
     );
   }
 
+
+  /* =====================================================
+     MAIN PAGE
+  ===================================================== */
+
   return (
-    <div className="container">
-      <h1>🔴 Live Football</h1>
+    <main className="container live-page">
+
+      {/* =================================================
+          HEADER
+      ================================================= */}
+
+      <section className="live-page-header">
+
+        <div>
+
+          <span className="live-page-kicker">
+            FOOTBALL
+          </span>
+
+          <h1>
+            🔴 Live Scores
+          </h1>
+
+          <p>
+            Follow matches happening right now
+          </p>
+
+        </div>
+
+
+        <div className="live-header-right">
+
+          <div className="live-status-pill">
+            <span className="live-dot"></span>
+            LIVE NOW
+          </div>
+
+          <button
+            className="live-refresh-button"
+            onClick={loadLiveGames}
+            title="Refresh live matches"
+          >
+            ↻
+          </button>
+
+        </div>
+
+      </section>
+
+
+      {/* =================================================
+          MATCH COUNT
+      ================================================= */}
+
+      {games.length > 0 && (
+        <div className="live-match-summary">
+
+          <span>
+            <strong>
+              {games.length}
+            </strong>{" "}
+            live {games.length === 1 ? "match" : "matches"}
+          </span>
+
+          <span className="live-updating">
+            ● Updating every 30 seconds
+          </span>
+
+        </div>
+      )}
+
+
+      {/* =================================================
+          NO LIVE MATCHES
+      ================================================= */}
 
       {games.length === 0 ? (
-        <div className="card">
-          <h2>No live games right now</h2>
-        </div>
+        <section className="live-empty-card">
+
+          <div className="live-empty-icon">
+            ⚽
+          </div>
+
+          <h2>
+            No live games right now
+          </h2>
+
+          <p>
+            There are currently no football matches in progress.
+          </p>
+
+          <button
+            className="live-retry-button"
+            onClick={loadLiveGames}
+          >
+            ↻ Check Again
+          </button>
+
+        </section>
       ) : (
-        <div className="fixtures-grid">
+
+        /* =================================================
+           MATCH GRID
+        ================================================= */
+
+        <section className="live-matches-grid">
+
           {games.map((game) => {
-            // THIS IS THE REAL API-FOOTBALL MATCH ID
+
             const matchId = game.fixture?.id;
 
             const home = game.teams?.home;
@@ -117,91 +287,213 @@ export default function LiveScores() {
               game.fixture?.status?.short ||
               "LIVE";
 
-            const minute =
+            const elapsed =
               game.fixture?.status?.elapsed;
 
+            const extra =
+              game.fixture?.status?.extra;
+
+            const leagueName =
+              game.league?.name ||
+              "Football";
+
+            const country =
+              game.league?.country ||
+              "";
+
             return (
-              <div
-                className="card"
+              <article
+                className="live-match-card"
                 key={matchId}
               >
-                <h3>
-                  🔴 LIVE
-                  {minute
-                    ? ` ${minute}'`
-                    : ""}
-                </h3>
 
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: "30px",
-                    textAlign: "center",
-                  }}
-                >
-                  <div>
-                    {home?.logo && (
-                      <img
-                        src={home.logo}
-                        width="70"
-                        height="70"
-                        alt={home.name}
-                      />
-                    )}
+                {/* =========================================
+                    MATCH TOP
+                ========================================= */}
 
-                    <h3>
-                      {home?.name}
-                    </h3>
+                <div className="live-match-top">
+
+                  <div className="live-competition">
+
+                    <span className="live-competition-icon">
+                      🏆
+                    </span>
+
+                    <div>
+                      <strong>
+                        {leagueName}
+                      </strong>
+
+                      {country && (
+                        <small>
+                          {country}
+                        </small>
+                      )}
+                    </div>
+
                   </div>
 
-                  <div>
-                    <h1>
-                      {homeScore} - {awayScore}
-                    </h1>
 
-                    <p>{status}</p>
+                  <div className="live-match-badge">
+
+                    <span className="live-dot"></span>
+
+                    LIVE
+
                   </div>
 
-                  <div>
-                    {away?.logo && (
-                      <img
-                        src={away.logo}
-                        width="70"
-                        height="70"
-                        alt={away.name}
-                      />
-                    )}
-
-                    <h3>
-                      {away?.name}
-                    </h3>
-                  </div>
                 </div>
 
-                <p>
-                  🏆{" "}
-                  {game.league?.name ||
-                    "Football"}
-                </p>
 
-                <p>
-                  🆔 Match ID: {matchId}
-                </p>
+                {/* =========================================
+                    MATCH STATUS
+                ========================================= */}
 
-                {/* IMPORTANT */}
-                <Link
-                  to={`/match/${matchId}`}
-                  className="details-button"
-                >
-                  📋 Match Details
-                </Link>
-              </div>
+                <div className="live-match-status">
+
+                  <span>
+                    {status}
+                  </span>
+
+                  {elapsed && (
+                    <strong>
+                      {elapsed}'
+                      {extra
+                        ? ` +${extra}`
+                        : ""}
+                    </strong>
+                  )}
+
+                </div>
+
+
+                {/* =========================================
+                    TEAMS + SCORE
+                ========================================= */}
+
+                <div className="live-teams">
+
+                  {/* HOME */}
+
+                  <div className="live-team home-team">
+
+                    <div className="live-team-logo">
+
+                      {home?.logo ? (
+                        <img
+                          src={home.logo}
+                          alt={`${home.name} logo`}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span>
+                          ⚽
+                        </span>
+                      )}
+
+                    </div>
+
+                    <h3>
+                      {home?.name || "Home Team"}
+                    </h3>
+
+                    <span className="live-home-label">
+                      HOME
+                    </span>
+
+                  </div>
+
+
+                  {/* SCORE */}
+
+                  <div className="live-score">
+
+                    <div className="live-score-numbers">
+                      <span>
+                        {homeScore}
+                      </span>
+
+                      <b>
+                        :
+                      </b>
+
+                      <span>
+                        {awayScore}
+                      </span>
+                    </div>
+
+                    <small>
+                      {elapsed
+                        ? `${elapsed}'`
+                        : "LIVE"}
+                    </small>
+
+                  </div>
+
+
+                  {/* AWAY */}
+
+                  <div className="live-team away-team">
+
+                    <div className="live-team-logo">
+
+                      {away?.logo ? (
+                        <img
+                          src={away.logo}
+                          alt={`${away.name} logo`}
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span>
+                          ⚽
+                        </span>
+                      )}
+
+                    </div>
+
+                    <h3>
+                      {away?.name || "Away Team"}
+                    </h3>
+
+                    <span className="live-away-label">
+                      AWAY
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                {/* =========================================
+                    MATCH FOOTER
+                ========================================= */}
+
+                <div className="live-match-footer">
+
+                  <span className="live-match-id">
+                    Match #{matchId}
+                  </span>
+
+
+                  <Link
+                    to={`/match/${matchId}`}
+                    className="live-details-button"
+                  >
+                    Match Details
+                    <span>
+                      →
+                    </span>
+                  </Link>
+
+                </div>
+
+              </article>
             );
           })}
-        </div>
+
+        </section>
       )}
-    </div>
+
+    </main>
   );
 }
